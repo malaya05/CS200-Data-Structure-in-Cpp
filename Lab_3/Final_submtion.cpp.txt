@@ -1,0 +1,58 @@
+/*
+    	Alaya, Jason
+    	Mendoza, Moises
+ 
+    	CS A200
+    	September 17, 2017
+ 
+    	Lab 3
+    	*/
+ 
+    	int divisor = 1;
+    	for (int i = 0; i < digits; i++)
+    	{
+            	/*
+This loop will run (K) times, where (K) refers to the number of digits in each element in the array. Starting from the least significant digit going one digit at a time to the left most significant digit.
+            	So the Big O notation for this loop is O(K).
+            	*/
+            	int looper = 0;
+            	int j = 0;
+            	while ( j < 10 && looper < numOfElements)
+            	{
+                    	/*
+                    	This loop will run 10 times for the worst case, because we are comparing the
+                    	numbers from 0 to 9 to each digit in each element in the array.
+If the size of the sorted array (looper) becomes equal to the array we are sorting, then this loop will terminate and move on to the next digit.
+                    	So the Big O notation for this loop is O(10).
+                    	*/
+                    	 for(int index = 0; index < numOfElements; index++)
+                    	{
+                            	/*
+                            	This loop will run the size of the array which makes it linear time O(n)
+                            	where n is the number of elements in the array.
+                            	So the Big O notation for this loop is O(n) for the worst case.
+                            	*/
+                            	if (a1[index] / divisor % 10 == j)
+                                    	a2[looper++] = a1[index];
+                    	}
+                    	++j;
+            	}
+            	divisor *= 10;
+ 
+            	int* temp = a1;
+            	a1 = a2;
+            	a2 = temp;
+ 
+            	cout << endl;
+            	cout << "Pass " << i << ": ";
+            	print(a1, numOfElements);
+    	}
+    	delete[] a2;
+ 
+    	/*
+    	the total running time for this algorithm as following:
+    	O(K) for the first loop where (K) is the number if digits for each elements in the array
+    	O(10) for the second loop which loops from 0 to 9.
+    	O(n) for the third loop which loop through the indices of the array to be sorted.
+    	Total running time is O(K * 10 * n) which simplify to O(K*n)
+    	*/
